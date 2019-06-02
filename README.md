@@ -1,5 +1,5 @@
 # TweepyHashtagSearch
-A simply python script using Tweepy that generates a spreadsheet of tweets that have used a given hashtag.
+A simply python script using Tweepy that generates a spreadsheet of tweets that have used a given hashtag. Due to limitations in the twitter API, this can only get tweets created in the past 7 days.
 
 ## Usage
 ```
