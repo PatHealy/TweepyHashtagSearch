@@ -37,11 +37,13 @@ def get_tweets(api, query_string, limit):
             t['tweet_id'] = str(tweet.id)
             t['author'] = str(tweet.author.name)
             t['handle'] = "@" + str(tweet.author.screen_name)
+            t['created_at'] = str(tweet.created_at)
             t['text'] = str(tweet.full_text)
             t['media'] = []
             print("id: " + str(tweet.id))
             print("author: " + str(tweet.author.name))
             print("handle: " + "@" + str(tweet.author.screen_name))
+            print("date: " + str(tweet.created_at))
             print("text: " + str(tweet.full_text))
             if 'extended_entities' in tweet._json and 'media' in tweet._json['extended_entities']:
                 out = 'extended media: '
@@ -58,6 +60,8 @@ def get_tweets(api, query_string, limit):
                 out = out[:-2]
                 print(out)
             print()
+            print("====================================")
+            print()
             tweets.append(t)
     return tweets
 
@@ -65,7 +69,7 @@ def save_tweets(fn, tweets):
     with open(fn, 'w') as writeFile:
         writer = csv.writer(writeFile)
         
-        header = ['tweet_id', 'author', 'handle', 'text', 'media_link', 'media_link_2', 'media_link_3', '...']
+        header = ['tweet_id', 'author', 'handle', 'datetime', 'text', 'media_link', 'media_link_2', 'media_link_3', '...']
         writer.writerow(header)
         
         for tweet in tweets:
@@ -73,6 +77,7 @@ def save_tweets(fn, tweets):
             ln.append(tweet['tweet_id'])
             ln.append(tweet['author'])
             ln.append(tweet['handle'])
+            ln.append(tweet['created_at'])
             ln.append(tweet['text'])
             for m in tweet['media']:
                 ln.append(m)
